@@ -11,6 +11,10 @@ body {
     color: #ccc;
 }
 
+main {
+    margin-bottom: 120px;
+}
+
 fieldset {
     display: flex;
     gap: 3pt;
@@ -46,6 +50,11 @@ div.list-item {
     background: #000;
     border-radius: 20px;
     padding: 10px;
+}
+
+div.list-item[data-pinned="true"] {
+    border: solid 2px #0f3;
+    padding: 8px;
 }
 
 .item-genre {
@@ -147,7 +156,7 @@ span.rarity[data-rank="2"] {background: linear-gradient(-30deg, #903 0%, #f69 10
 span.rarity[data-rank="3"] {background: linear-gradient(-30deg, #960 0%, #fc0 100%);}
 
 #selector {
-    position: sticky;
+    position: fixed;
     bottom: 0;
     background: #222c;
 }

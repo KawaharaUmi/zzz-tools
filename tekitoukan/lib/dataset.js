@@ -13,7 +13,7 @@ class item {
             .then(res => res.text())
             .then(res => {
                 res.trim().split('\n').slice(1).map(l => {
-                    const data = l.split(',')
+                    const data = l.split(',').map(e => e.replaceAll('\r', ''))
                     item.data.push({
                         id: Number(data[0]),
                         genre: data[1],
@@ -46,7 +46,7 @@ class material {
             .then(res => res.text())
             .then(res => {
                 res.trim().split('\n').slice(1).forEach(l => {
-                    const data = l.split(',')
+                    const data = l.split(',').map(e => e.replaceAll('\r', ''))
                     material.data.push({
                         id: Number(data[0]),
                         rank: Number(data[1]),
@@ -83,7 +83,7 @@ class area {
             .then(res => res.text())
             .then(res => {
                 res.trim().split('\n').slice(1).forEach(l => {
-                    const data = l.split(',')
+                    const data = l.split(',').map(e => e.replaceAll('\r', ''))
                     area.data.push({
                         id: data[0],
                         name: names.area[Number(data[1])-1]+data[2]+'-'+(data[3] == 4 ? '深層' : data[3]),

@@ -16,7 +16,7 @@
     <body>
         <main id="app">
             <section id="item-list">
-                <div class="list-item" v-for="item in item.getList(filterKey, true)">
+                <div class="list-item" v-for="item in item.getList(filterKey, true)" :data-id="item.id" data-pinned="false" @click="pinnedItem">
                     <p class="item-genre" :data-genre="item.genre">{{names.genre[item.genre]}}</p>
                     <div class="item-details">
                         <p class="item-name">{{item.name}}</p>
@@ -58,11 +58,26 @@
                 setup() {
                     const message = ref('Hello Vue!')
                     const filterKey = ref(new Array(names.genre.length))
+                    const pinned = ref([])
                     filterKey.value.fill(false)
-                    console.log(filterKey.value)
+
+                    function pinnedItem(e) {
+                        const element = e.currentTarget
+                        const itemId = Number(e.currentTarget.dataset.id)
+                        const exist = pinned.value.findIndex(e => e == itemId)
+                        if(exist === -1) {
+                            pinned.value.push(itemId)
+                            element.dataset.pinned = true
+                        } else {
+                            pinned.value.splice(exist, 1)
+                            element.dataset.pinned = false
+                        }
+                        console.log(pinned.value)
+                    }
 
                     return {
-                        message, names, item, material, area, filterKey
+                        message, names, item, material, area, filterKey, pinned,
+                        pinnedItem,
                     }
                 }
             }).mount('#app')
