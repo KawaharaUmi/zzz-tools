@@ -15,8 +15,8 @@ class item {
                 return res.text()
             })
             .then(res => {
-                console.log(res.trim().split('\r\n'))
-                res.trim().split('\r\n').slice(1).map(l => {
+                console.log(res.trim().split('\n'))
+                res.trim().split('\n').slice(1).map(l => {
                     const data = l.split(',')
                     console.log(data)
                     item.data.push({
@@ -50,7 +50,7 @@ class material {
             .then(res => res.text())
             .then(res => {
                 console.log(res)
-                res.trim().split('\r\n').slice(1).forEach(l => {
+                res.trim().split('\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     material.data.push({
                         id: Number(data[0]),
@@ -88,7 +88,7 @@ class area {
             .then(res => res.text())
             .then(res => {
                 console.log(res)
-                res.trim().split('\r\n').slice(1).forEach(l => {
+                res.trim().split('\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     area.data.push({
                         id: data[0],
