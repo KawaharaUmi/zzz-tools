@@ -12,6 +12,7 @@ class item {
         fetch('./lib/item.csv')
             .then(res => res.text())
             .then(res => {
+                console.log(res)
                 item.data = res.trim().split('\r\n').slice(1).map(l => {
                     const data = l.split(',')
                     return {
@@ -44,6 +45,7 @@ class material {
         fetch('./lib/material.csv')
             .then(res => res.text())
             .then(res => {
+                console.log(res)
                 res.trim().split('\r\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     material.data.push({
@@ -81,6 +83,7 @@ class area {
         fetch('./lib/area.csv')
             .then(res => res.text())
             .then(res => {
+                console.log(res)
                 res.trim().split('\r\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     area.data.push({
