@@ -10,7 +10,10 @@ class item {
     static data = []
     static {
         fetch('./lib/item.csv')
-            .then(res => res.text())
+            .then(res => {
+                console.log(res)
+                return res.text()
+            })
             .then(res => {
                 console.log(res)
                 item.data = res.trim().split('\r\n').slice(1).map(l => {
