@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="./style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <script type="importmap">
+            {
+                "imports": {
+                    "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+                    "dataset" : "./lib/dataset.js"
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <main id="app">
+            <section id="item-list">
+                <div class="list-item" v-for="item in item.getList(filterKey, true)">
+                    <p class="item-genre" :data-genre="item.genre">{{names.genre[item.genre]}}</p>
+                    <div class="item-details">
+                        <p class="item-name">{{item.name}}</p>
+                        <dl class="item-data">
+                            <div class="price">
+                                <dt>販売価格</dt>
+                                <dd><span class="rarity" data-rank="3">S</span> {{item.price.s}}</dd>
+                                <dd><span class="rarity" data-rank="2">A</span> {{item.price.a}}</dd>
+                            </div>
+                            <div>
+                                <dt>使用素材</dt>
+                                <dd><span class="rarity" :data-rank="material.getRank(item.material.primary.id)">{{material.getRarity(item.material.primary.id)}}</span>
+                                    {{material.getName(item.material.primary.id)}} ✕ {{item.material.primary.amount}}</dd>
+                                <dd><span class="rarity" :data-rank="material.getRank(item.material.secondary.id)">{{material.getRarity(item.material.secondary.id)}}</span>
+                                    {{material.getName(item.material.secondary.id)}} ✕ {{item.material.secondary.amount}}</dd>
+                            </div>
+                        </dl>
+                        <dl class="material-data">
+                            <div>
+                                <dd v-for="(data, key) in area.getNameFromMaterial(item.material.primary.id)" :data-area="data">{{data}}</dd>
+                            </div>
+                            <div>
+                                <dd :data-currency="material.getCurrency(item.material.primary.id)">{{names.currency[material.getCurrency(item.material.primary.id)]}}(5)で購入</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+            <fieldset id="selector">
+                <legend>ジャンルを絞り込む</legend>
+                <label v-for="(name, key) in names.genre"><input type="checkbox" :value="key" v-model="filterKey[key]" :checked="filterKey[key]">{{name}}</label>
+            </fieldset>
+        </main>
+        <script type="module">
+            import { createApp, ref } from 'vue'
+            import { names, item, material, area } from 'dataset'
+            
+            createApp({
+                setup() {
+                    const message = ref('Hello Vue!')
+                    const filterKey = ref(new Array(names.genre.length))
+                    filterKey.value.fill(false)
+                    console.log(filterKey.value)
+
+                    return {
+                        message, names, item, material, area, filterKey
+                    }
+                }
+            }).mount('#app')
+        </script>
+    </body>
+</html>
