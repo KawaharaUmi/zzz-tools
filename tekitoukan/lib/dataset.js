@@ -28,12 +28,13 @@ class item {
                 console.log(item.data)
             })
     }
-    static getList(keys, sort) {
+    static getList(keys, sort = false) {
         const result = item.data.filter(e => keys[e.genre])
-        if (sort != true) {
+        if (!sort) {
             return result
         } else {
-            return result.sort((a,b) => a.price.s < b.price.s)
+            const sorted = result.sort((a,b) => a.price.s < b.price.s)
+            return sorted
         }
     }
 }
