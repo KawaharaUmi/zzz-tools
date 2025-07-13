@@ -15,7 +15,7 @@ class item {
                 return res.text()
             })
             .then(res => {
-                console.log(res)
+                console.log(res.trim())
                 res.trim().split('\r\n').slice(1).map(l => {
                     const data = l.split(',')
                     console.log(data)
