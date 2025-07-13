@@ -10,15 +10,10 @@ class item {
     static data = []
     static {
         fetch('./lib/item.csv')
+            .then(res => res.text())
             .then(res => {
-                console.log(res)
-                return res.text()
-            })
-            .then(res => {
-                console.log(res.trim().split('\n'))
                 res.trim().split('\n').slice(1).map(l => {
                     const data = l.split(',')
-                    console.log(data)
                     item.data.push({
                         id: Number(data[0]),
                         genre: data[1],
@@ -49,7 +44,6 @@ class material {
         fetch('./lib/material.csv')
             .then(res => res.text())
             .then(res => {
-                console.log(res)
                 res.trim().split('\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     material.data.push({
@@ -87,7 +81,6 @@ class area {
         fetch('./lib/area.csv')
             .then(res => res.text())
             .then(res => {
-                console.log(res)
                 res.trim().split('\n').slice(1).forEach(l => {
                     const data = l.split(',')
                     area.data.push({
