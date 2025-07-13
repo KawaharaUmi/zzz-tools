@@ -16,9 +16,9 @@ class item {
             })
             .then(res => {
                 console.log(res)
-                item.data = res.trim().split('\r\n').slice(1).map(l => {
+                res.trim().split('\r\n').slice(1).map(l => {
                     const data = l.split(',')
-                    return {
+                    item.data.push({
                         id: Number(data[0]),
                         genre: data[1],
                         name: data[2],
@@ -27,7 +27,7 @@ class item {
                             primary: {id: data[5], amount: data[6]},
                             secondary: {id: data[7], amount: data[8]},
                         }
-                    }
+                    })
                 })
                 console.log(item.data)
             })
