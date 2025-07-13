@@ -18,6 +18,7 @@ class item {
                 console.log(res)
                 res.trim().split('\r\n').slice(1).map(l => {
                     const data = l.split(',')
+                    console.log(data)
                     item.data.push({
                         id: Number(data[0]),
                         genre: data[1],
