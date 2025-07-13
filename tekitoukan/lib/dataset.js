@@ -28,7 +28,7 @@ class item {
                 console.log(item.data)
             })
     }
-    static getList(keys, sort = false) {
+    static getList(keys, sort) {
         const result = item.data.filter(e => keys[e.genre])
         if (!sort) {
             return result
