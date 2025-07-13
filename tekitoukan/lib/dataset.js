@@ -30,7 +30,7 @@ class item {
     }
     static getList(keys, sort) {
         const result = item.data.filter(e => keys[e.genre])
-        if (!sort) {
+        if (sort != true) {
             return result
         } else {
             return result.sort((a,b) => a.price.s < b.price.s)
