@@ -56,9 +56,12 @@
                     </ul>
                 </details>
             </fieldset>
+            <button id="display-mode" :data-pinned="false">
+                <span>全</span><span>選</span>
+            </button>
         </main>
         <script type="module">
-            import { createApp, ref } from 'vue'
+            import { createApp, ref, onMounted, onUpdated } from 'vue'
             import { names, item, material, area } from 'dataset'
             
             await Promise.all([item.loadData(), material.loadData(), area.loadData()])
@@ -78,17 +81,33 @@
                         const exist = pinned.value.findIndex(e => e == itemId)
                         if(exist === -1) {
                             pinned.value.push(itemId)
-                            items.value.data[itemId].pinned = true
+                            item.togglePin(itemId, true)
                         } else {
                             pinned.value.splice(exist, 1)
-                            items.value.data[itemId].pinned = false
+                            item.togglePin(itemId, false)
                         }
                     }
+                    
+                    onMounted(() => {
+                        const data = JSON.parse(localStorage.getItem('tekitoukan'))
+                        pinned.value = data.pinned
+                        for(let e of data.pinned) {
+                            item.togglePin(e)
+                        }
+                    })
+
+                    onUpdated(() => {
+                        const data = {
+                            pinned: pinned.value
+                        }
+                        localStorage.setItem('tekitoukan', JSON.stringify(data))
+                    })
 
                     return {
                         names, items, material, area,
                         filterKey, pinned, pinnedOnly,
                         pinnedItem,
+                        onUpdated,
                     }
                 }
             }).mount('#app')

@@ -41,11 +41,14 @@ class item extends dataObj {
             return sorted
         }
     }
-    static getListAll(sort = false) {
-        if(!sort) return item.data
-        const result = item.data.toSorted((a,b) => a.price.s < b.price.s)
-        console.log(result)
-        return result
+    static togglePin(id, bool = undefined) {
+        const target = this.data.find(e => e.id === id)
+        if(typeof bool === 'boolean') {
+            target.pinned = bool
+        } else {
+            target.pinned = !target.pinned
+        }
+        return target.pinned
     }
 }
 
