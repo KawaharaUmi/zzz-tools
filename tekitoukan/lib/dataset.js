@@ -33,7 +33,7 @@ class item extends dataObj {
         console.log(this.data)
     }
     static getList(keys, pin = false, sort = false) {
-        const result = item.data.filter(e => keys[e.genre] && pin ? e.pinned : true)
+        const result = this.data.filter(e => keys[e.genre] && (pin ? e.pinned : true))
         if (!sort) {
             return result
         } else {

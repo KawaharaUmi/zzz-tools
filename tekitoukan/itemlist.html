@@ -47,7 +47,7 @@
             </section>
             <fieldset id="selector">
                 <legend>Control</legend>
-                <p><label v-for="(name, key) in names.genre"><input type="checkbox" :value="key" v-model="filterKey[key]" :checked="filterKey[key]">{{name}}</label></p>
+                <p><label v-for="(name, key) in names.genre"><input type="checkbox" :value="true" v-model="filterKey[key]" :checked="filterKey[key]">{{name}}</label></p>
                 <p><label><input type="radio" name="pinned" v-model="pinnedOnly" :value="true">選択済みのみ</label><label><input type="radio" name="pinned" v-model="pinnedOnly" :value="false">全て</label></p>
                 <details style="display: none;">
                     <summary>選択済みリスト</summary>
@@ -68,7 +68,7 @@
                 setup() {
                     const items = ref(item)
                     const filterKey = ref(new Array(names.genre.length))
-                    filterKey.value.fill(true)
+                    filterKey.value.fill(false)
                     const pinned = ref([])
                     const pinnedOnly = ref(false)
 
@@ -83,7 +83,6 @@
                             pinned.value.splice(exist, 1)
                             items.value.data[itemId].pinned = false
                         }
-                        console.log(pinned.value)
                     }
 
                     return {
