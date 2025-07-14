@@ -90,9 +90,11 @@
                     
                     onMounted(() => {
                         const data = JSON.parse(localStorage.getItem('tekitoukan'))
-                        pinned.value = data.pinned
-                        for(let e of data.pinned) {
-                            item.togglePin(e)
+                        if(data) {
+                            pinned.value = data.pinned
+                            for(let e of data.pinned) {
+                                item.togglePin(e)
+                            }
                         }
                     })
 
