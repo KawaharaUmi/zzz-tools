@@ -49,13 +49,12 @@
                 <legend>Control</legend>
                 <p><label v-for="(name, key) in names.genre"><input type="checkbox" :value="key" v-model="filterKey[key]" :checked="filterKey[key]">{{name}}</label></p>
                 <p><label><input type="radio" name="pinned" v-model="pinnedOnly" :value="true">選択済みのみ</label><label><input type="radio" name="pinned" v-model="pinnedOnly" :value="false">全て</label></p>
-                <!--
-                <details>
+                <details style="display: none;">
                     <summary>選択済みリスト</summary>
                     <ul>
                         <li v-for="id of pinned.toSorted((a,b) => a > b)">{{id}}</li>
                     </ul>
-                </details>-->
+                </details>
             </fieldset>
         </main>
         <script type="module">
