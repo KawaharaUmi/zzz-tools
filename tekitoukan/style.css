@@ -45,7 +45,7 @@ section#item-list {
 
 div.list-item {
     display: flex;
-    gap: 5pt;
+    gap: 8pt;
     margin: 10px;
     background: #000;
     border-radius: 20px;
@@ -111,11 +111,15 @@ div.list-item[data-pinned="true"] {
     font-size: 10pt;
 }
 
+.material-data {
+    display: flex;
+    flex-direction: column;
+    gap: 3pt;
+}
 
 .material-data div {
     display: flex;
     gap: 3pt;
-    margin: 0 0 3pt 0;
     font-size: 10pt;
 }
 
